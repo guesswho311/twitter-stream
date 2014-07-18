@@ -1,5 +1,6 @@
-package twitter
+package com.johnnyquest.twitter.processors
 
+import com.johnnyquest.twitter._
 import akka.actor._
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit

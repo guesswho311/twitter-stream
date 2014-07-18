@@ -1,5 +1,6 @@
-package twitter
+package com.johnnyquest.twitter
 
+import com.johnnyquest.twitter.processors._
 import twitter4j._
 import twitter4j.conf.ConfigurationBuilder
 import akka.actor._

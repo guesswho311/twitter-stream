@@ -1,4 +1,4 @@
-package twitter
+package com.johnnyquest.twitter
 
 import com.typesafe.config.ConfigFactory
 

@@ -1,4 +1,4 @@
-package twitter
+package com.johnnyquest.twitter
 
 import akka.actor._
 import scala.concurrent.duration._

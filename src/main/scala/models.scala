@@ -1,4 +1,4 @@
-package twitter
+package com.johnnyquest.twitter
 
 import twitter4j._
 

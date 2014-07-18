@@ -1,5 +1,6 @@
-package twitter
+package com.johnnyquest.twitter.processors
 
+import com.johnnyquest.twitter._
 import akka.actor._
 import akka.routing.FromConfig
 import scala.concurrent.duration._
