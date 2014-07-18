@@ -1,6 +1,7 @@
 package twitter
 
 import akka.actor._
+import akka.routing.FromConfig
 import twitter4j.Status
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
@@ -10,7 +11,7 @@ trait EmojiTrackerComponent {
 }
 
 trait AkkaEmojiTracker extends EmojiTrackerComponent with AkkaSystem with StorageComponent{
-  val emojiActor = system.actorOf(Props(new EmojiTrackerActor),"emoji-trackers")
+  val emojiActor = system.actorOf(Props(new EmojiTrackerActor).withRouter(FromConfig()).withDispatcher("emoji-dispatcher"), "emoji-trackers")
 
   class EmojiTrackerActor extends Actor {
     import context._

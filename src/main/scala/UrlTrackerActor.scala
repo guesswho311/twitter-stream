@@ -1,5 +1,7 @@
 package twitter
+
 import akka.actor._
+import akka.routing.FromConfig
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
 import twitter4j.Status
@@ -9,7 +11,7 @@ trait UrlTrackerComponent {
 }
 
 trait AkkaUrlTracker extends UrlTrackerComponent with AkkaSystem with StorageComponent {
-  val urlActor = system.actorOf(Props(new UrlTrackerActor))
+  val urlActor = system.actorOf(Props(new UrlTrackerActor).withRouter(FromConfig()).withDispatcher("url-dispatcher"), "url-trackers")
 
   class UrlTrackerActor extends Actor {
     import context._

@@ -11,7 +11,7 @@ trait TweetTrackerComponent {
 }
 
 trait AkkaTweetTrackerComponent extends TweetTrackerComponent with AkkaSystem {
-  val tweetTrackerActor = system.actorOf(Props(new TweetTrackerActor).withRouter(FromConfig()).withDispatcher("tweet-track"), "tweet-trackers")
+  val tweetTrackerActor = system.actorOf(Props(new TweetTrackerActor).withRouter(FromConfig()).withDispatcher("tweet-dispatcher"), "tweet-trackers")
   class TweetTrackerActor extends Actor {
     import context._
     def receive: Receive = {

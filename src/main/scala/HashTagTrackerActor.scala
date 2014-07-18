@@ -1,5 +1,7 @@
 package twitter
+
 import akka.actor._
+import akka.routing.FromConfig
 import twitter4j.Status
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
@@ -9,7 +11,7 @@ trait HashTagTrackerComponent {
 }
 
 trait AkkaHashTagTrackerComponent extends HashTagTrackerComponent with StorageComponent with AkkaSystem {
-  val hashActor = system.actorOf(Props(new HashTagTrackerActor))
+  val hashActor = system.actorOf(Props(new HashTagTrackerActor).withRouter(FromConfig()).withDispatcher("hash-dispatcher"), "hash-trackers")
 
   class HashTagTrackerActor extends Actor {
     import context._

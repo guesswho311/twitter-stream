@@ -1,6 +1,7 @@
 package twitter
 
 import akka.actor._
+import akka.routing.FromConfig
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
 
@@ -9,7 +10,7 @@ trait StorageComponent {
 }
 
 trait AkkaStorageComponent extends StorageComponent with AkkaSystem{
-  val storageActor = system.actorOf(Props(new StorageActor))
+  val storageActor = system.actorOf(Props(new StorageActor).withRouter(FromConfig()).withDispatcher("storage-dispatcher"), "storage")
 
   class StorageActor extends Actor {
     import context._
