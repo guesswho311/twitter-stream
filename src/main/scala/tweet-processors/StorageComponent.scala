@@ -50,8 +50,13 @@ trait AkkaStorageComponent extends StorageComponent with AkkaSystem{
         scheduleTweetReport(5)
     }
 
-    def getTopItem(ls: List[String]) =
-      ls.groupBy(identity).mapValues(_.size).maxBy(i => i._2)._1
+    def getTopItem(ls: List[String]) = {
+      try {
+        ls.groupBy(identity).mapValues(_.size).maxBy(i => i._2)._1
+      } catch {
+        case e: java.lang.UnsupportedOperationException => scheduleTweetReport(5)
+      }
+    }
 
     def scheduleTweetReport(time: Int) =
       context.system.scheduler.scheduleOnce(FiniteDuration(time, TimeUnit.SECONDS)){
